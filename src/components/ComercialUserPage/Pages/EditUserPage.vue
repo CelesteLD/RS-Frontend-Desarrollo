@@ -71,6 +71,14 @@
               Authorization: `${token}`
             }
           });
+          const userData = response.data;
+
+          // Convertir la fecha a 'yyyy-MM-dd'
+          if (userData.fecha_nacimiento) {
+            const date = new Date(userData.fecha_nacimiento);
+            const formattedDate = date.toISOString().split('T')[0]; // Esto dará 'yyyy-MM-dd'
+            userData.fecha_nacimiento = formattedDate;
+          }
           this.user = response.data;
         } catch (error) {
           console.error('Error al obtener los detalles del usuario:', error);
