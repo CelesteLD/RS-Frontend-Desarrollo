@@ -23,6 +23,7 @@
 
 <script>
 import axios from '../../../backend.js';
+import { API_BASE_URL} from './../../../config.js'
 
 export default {
   name: 'PublicidadBanner',
@@ -55,7 +56,7 @@ export default {
             try {
               const imageResponse = await axios.get(`/api/publicidad/image/${publicidad.id_publicidad}`);
               console.log('Imagen:', imageResponse.data.imagePath);
-              publicidad.image = `http://213.130.144.113:3003/api/image/publicidad/${imageResponse.data.imagePath}`;
+              publicidad.image = `${API_BASE_URL}/api/image/publicidad/${imageResponse.data.imagePath}`;
               console.log('Imagen:', publicidad.image);
             } catch (error) {
               console.error(`Error al obtener la imagen para la publicidad con ID ${publicidad.id_publicidad}:`, error);
