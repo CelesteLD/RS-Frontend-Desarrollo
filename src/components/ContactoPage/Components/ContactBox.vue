@@ -12,11 +12,11 @@ export default {
     title: {
       type: String,
       required: true
-    },
-    description: {
+    }, 
+    description: { 
       type: String,
       required: true
-    },
+    }, 
     isSelected: {
       type: Boolean,
       default: false
@@ -26,7 +26,7 @@ export default {
     showForm() {
       this.$emit('show-form', this.title);
     }
-  }
+  } 
 };
 </script>
 
