@@ -2,12 +2,11 @@
   <nav class="navbar" ref="navbar">
     <div class="logos">
       <img :src="govLogo" alt="Gobierno de Canarias Logo" class="partner-logo" />
-      <img :src="ueLogo" alt="Unión Europea Logo" class="partner-logo partner-logo-hide" />
-      <img :src="canariasLogo" alt="Canarias Avanza Logo" class="partner-logo partner-logo-hide" />
-      <router-link to="/">
-        <img :src="logo" alt="Logo del Proyecto" class="logo-img">
-      </router-link>
-
+      <div class="eu-logos">
+        <img :src="ueLogo" alt="Unión Europea Logo" class="partner-logo partner-logo-eu" />
+        <img :src="canariasLogo" alt="Canarias Avanza Logo" class="partner-logo partner-logo-eu" />
+      </div>
+      <img :src="logo" alt="Logo del Proyecto" class="logo-img project-logo">
     </div>
     <div class="menu-icon" @click="toggleMenu">
       <i class="fas fa-bars hamburger-icon"></i>
@@ -16,12 +15,11 @@
       <li><router-link to="/" class="nav-item" :class="{ active: currentPage === 'inicio' }">INICIO</router-link></li>
       <li><router-link to="/restaurantes-solidarios" class="nav-item" :class="{ active: currentPage === 'restaurantes-solidarios' }">RESTAURANTES SOLIDARIOS</router-link></li>
       <li><router-link to="/proyecto" class="nav-item" :class="{ active: currentPage === 'proyecto' }">PROYECTO</router-link></li>
-      <li><router-link to="/contacto" class="nav-item" :class="{ active: currentPage === 'contacto' }"> CONTACTO </router-link></li>
+      <li><router-link to="/contacto" class="nav-item" :class="{ active: currentPage === 'contacto' }">CONTACTO</router-link></li>
       <li><router-link to="/depto-comercial" class="nav-item departamento-comercial" :class="{ active: currentPage === 'departamento-comercial' }">DEPARTAMENTO COMERCIAL</router-link></li>
     </ul>
   </nav>
 </template>
-
 
 <script>
 import logo from '@/assets/1.png';
@@ -71,7 +69,6 @@ export default {
 };
 </script>
 
-
 <style scoped>
 .navbar {
   display: flex;
@@ -88,9 +85,18 @@ export default {
   align-items: center;
 }
 
+.eu-logos {
+  display: flex;
+  flex-direction: row; /* Asegura que los logos europeos estén en una fila en la versión de escritorio */
+}
+
 .logo-img {
   max-width: 120px;
   max-height: 100px;
+}
+
+.project-logo {
+  margin-left: 10px; /* Espacio entre el logo del proyecto y los logos europeos */
 }
 
 .partner-logo {
@@ -148,21 +154,30 @@ export default {
   color: white; /* Texto blanco para la página activa */
 }
 
+.partner-logo-eu {
+  max-width: 130px;
+
+}
+
 /* Estilos para el menú desplegable */
 @media (max-width: 768px) {
   .logos {
-    margin-left: 10px; /* Ajustar margen para pegar a la izquierda */
+    flex-wrap: nowrap; /* Asegura que los logos se mantengan en una línea */
+    justify-content: space-between; /* Distribuye los logos uniformemente */
+  }
+
+  .eu-logos {
+    flex-direction: column; /* Coloca los logos europeos en una columna en pantallas pequeñas */
   }
 
   .nav-links {
     display: none;
     flex-direction: column;
-    width: 80%; /* Ajustar el ancho del menú */
+    width: 100%; /* Ajustar el ancho del menú */
     text-align: left; /* Cambiar a la izquierda */
     position: absolute;
     top: 60px; /* Ajustar la posición del menú */
-    left: 50%; /* Centrar horizontalmente */
-    transform: translateX(-50%);
+    left: 0; /* Ajustar la posición del menú */
     background-color: white;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     padding: 10px 0;
@@ -195,7 +210,13 @@ export default {
   }
 
   .partner-logo-hide {
-    display: none; /* Ocultar logos específicos en pantallas móviles */
+    display: block; /* Mostrar logos específicos en pantallas móviles */
+    max-width: 60px; /* Ajustar el tamaño según sea necesario */
+    margin: 5px 0; /* Ajustar el margen según sea necesario */
+  }
+
+  .logo-img {
+    display: none; /* Ocultar logo principal en pantallas móviles */
   }
 }
 </style>
